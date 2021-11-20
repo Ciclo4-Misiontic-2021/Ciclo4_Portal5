@@ -1,7 +1,5 @@
 import { Schema,model, SchemaTypes } from "mongoose";
-import { sortAndDeduplicateDiagnostics } from "typescript";
-import {Enum_FaseProjecto,Enum_estadoProjecto, Enum_estadoUsuario} from './enums';
-import { objetiveModel } from "./objetive";
+import {Enum_FaseProjecto,Enum_EstadoProjecto, Enum_EstadoUsuario} from './enums';
 import { projectModel } from "./projects";
 import {userModel} from "./user";
 
@@ -9,14 +7,14 @@ import {userModel} from "./user";
 interface solicitud{
     proyecto : Schema.Types.ObjectId; 
     estudiante : Schema.Types.ObjectId;
-    estado : Enum_estadoUsuario;
+    estado : Enum_EstadoUsuario;
 }
 
 
 const solicitudSchema = new Schema <solicitud>({
 proyecto:{type:Schema.Types.ObjectId,ref:projectModel},
 estudiante : {type : Schema.Types.ObjectId ,ref:userModel},
-estado : {type:String ,enum : Enum_estadoUsuario ,default: Enum_estadoUsuario.pendiente }
+estado : {type:String ,enum : Enum_EstadoUsuario ,default: Enum_EstadoUsuario.PENDIENTE }
 })
 
 const solicitudModel = model("solicitud",solicitudSchema,"solicitudes")

@@ -1,5 +1,5 @@
 import { Schema,model } from "mongoose";
-import {Enum_rol,Enum_estadoUsuario} from './enums';
+import {Enum_Rol,Enum_EstadoUsuario} from './enums';
 
 
 interface User{
@@ -7,8 +7,8 @@ interface User{
     identificacion: string;
     nombre:string;
     apellido:string;
-    rol:Enum_rol;
-    estado:Enum_estadoUsuario;
+    rol:Enum_Rol;
+    estado:Enum_EstadoUsuario;
 }
 // string con s minuscula es de tp y con S con mongoose
 
@@ -43,12 +43,12 @@ const userSchema = new Schema<User>({
     rol:{
         type:String,
         require:true,
-        enum:Enum_rol,
+        enum:Enum_Rol,
     },
     estado:{
         type:String,
-        enum:Enum_estadoUsuario,
-        default: Enum_estadoUsuario.pendiente,
+        enum:Enum_EstadoUsuario,
+        default: Enum_EstadoUsuario.PENDIENTE,
     }
 }
 );

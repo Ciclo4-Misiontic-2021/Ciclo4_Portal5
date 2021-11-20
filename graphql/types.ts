@@ -1,11 +1,10 @@
 import {gql} from 'apollo-server-express';
-import { Enum_estadoUsuario } from '../models/enums';
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 const typeDefs = gql`
-    enum Enum_estadoUsuario {
+    enum Enum_EstadoUsuario {
         PENDIENTE
         AUTORIZADO 
         NO_AUTRIZADO
@@ -20,12 +19,12 @@ const typeDefs = gql`
         nombre: String!
         apellido:String!
         correo : String!
-        estado : Enum_estadoUsuario!
+        estado : Enum_EstadoUsuario!
         rol : Enum_Rol
     }
 
     type Query {
-        Usarios:[usuario]
+        Usuarios:[Usuario]
     }
     `;
 

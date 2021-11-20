@@ -1,14 +1,14 @@
-enum Enum_rol{
-    estudiante = "Estudiante",
-    lider = "Lider",
-    administrador= "Admimistrador",
+enum Enum_Rol{
+    ESTUDIANTE = "ESTUDIANTE",
+    LIDER = "LIDER",
+    ADMINISTRADOR= "ADMINISTRADOR",
 }
-enum Enum_estadoUsuario{
-    pendiente="pendiente",
-    autorizado = "Autorizado",
-    no_autorizado= "no autorizado",
+enum Enum_EstadoUsuario{
+    PENDIENTE="PENDIENTE",
+    AUTORIZADO = "AUTORIZADO",
+    NO_AUTORIZADO= "NO AUTORIZADO",
 }
-enum Enum_estadoProjecto{
+enum Enum_EstadoProjecto{
     activo="Activo",
     inactivo = "Inactivo",
 }
@@ -24,4 +24,4 @@ enum Enum_TipoObjetivo{
     especifico = "especifico"
 }
 
-export {Enum_rol,Enum_estadoUsuario,Enum_estadoProjecto,Enum_FaseProjecto,Enum_TipoObjetivo};
+export {Enum_Rol,Enum_EstadoUsuario,Enum_EstadoProjecto,Enum_FaseProjecto,Enum_TipoObjetivo};
