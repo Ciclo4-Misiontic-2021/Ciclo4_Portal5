@@ -18,7 +18,7 @@ presupuesto:{type:Number,required:true,},
 fechaInicio:{type:Date,required:true,},
 fechaFin:{type:Date,required:true,},
 estado:{type:String,Enum:Enum_EstadoProyecto,default:Enum_EstadoProyecto.INACTIVO,},
-fase:{type:String,Enum:Enum_FaseProyecto,default:Enum_FaseProyecto.nul},
+fase:{type:String,Enum:Enum_FaseProyecto,default:Enum_FaseProyecto.NULO},
 lider:{type: Schema.Types.ObjectId,ref: userModel,},
 objetivosGenerales:{type:String ,default : " "},
 objetivosEspecificos:{type:String ,default : " "}

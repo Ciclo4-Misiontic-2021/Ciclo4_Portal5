@@ -1,3 +1,4 @@
+import { projectModel } from "../models/projects";
 import { userModel } from "../models/user";
 
 const resolvers ={
@@ -9,7 +10,15 @@ const resolvers ={
     Usuario : async (parent,args) =>{
         const usuario = await userModel.findOne({_id: args._id });
         return usuario ;
-    }
+    },
+    Proyectos : async (parent,args) =>{
+        const proyectos = await projectModel.find();
+        return proyectos;
+    },
+    Proyecto : async (parent,args) =>{
+        const proyecto = await projectModel.findOne({_id: args._id});
+        return proyecto;
+    },
 },
     Mutation : {
         crearUsuario: async (parent,args) => {

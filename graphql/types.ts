@@ -11,9 +11,9 @@ const typeDefs = gql`
         NO_AUTRIZADO
     }
     enum Enum_Rol{
-    ESTUDIANTE
-    LIDER
-    ADMINISTRADOR 
+        ESTUDIANTE
+        LIDER
+        ADMINISTRADOR 
     }
     enum Enum_FaseProyecto {
         INICIADO
@@ -23,6 +23,7 @@ const typeDefs = gql`
     enum Enum_EstadoProyecto {
         ACTIVO
         INACTIVO
+        NULO
     }
 
     type Usuario{
@@ -39,15 +40,20 @@ const typeDefs = gql`
         _id : ID!
         nombre: String!
         presupuesto: Float!
-        FechaInicio : Date!
+        fechaInicio : Date!
         fechaFin: Date!
         estado : Enum_EstadoProyecto!
         fase : Enum_FaseProyecto
+        lider : String!
+        objetivosGenerales:String
+        objetivosEspecificos:String
     }
 
     type Query {
         Usuarios:[Usuario]
         Usuario(_id:String!) :Usuario
+        Proyectos : [Proyecto]
+        Proyecto(_id:String!): Proyecto
     }
     type Mutation{
     crearUsuario(
