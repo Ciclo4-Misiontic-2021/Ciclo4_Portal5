@@ -6,6 +6,10 @@ const resolvers ={
         const usuarios = await userModel.find();
         return usuarios;
     },
+    Usuario : async (parent,args) =>{
+        const usuario = await userModel.findOne({_id: args._id });
+        return usuario ;
+    }
 },
     Mutation : {
         crearUsuario: async (parent,args) => {
@@ -13,13 +17,35 @@ const resolvers ={
             const usuarioCreado = await userModel.create({
                 nombre: args.nombre,
                 apellido:args.apellido,
-                identificacion:args.estado,
+                identificacion:args.identificacion,
                 correo: args.correo,
-                estado : args.estado,
                 rol : args.rol
             });
+            // verifica si se ingreso un estado y modifica el de defecto
+            if ( Object.keys(args).includes('estado')){
+                usuarioCreado.estado = args.estado;
+             }
             return usuarioCreado;
         },
+        eliminarUsuario: async (parent,args) =>{
+            //elimina con id y correo
+            if(Object.keys(args).includes('_id')){
+            const usuarioEliminado = await userModel.findOneAndDelete({_id: args._id})
+            return usuarioEliminado}
+            else if (Object.keys(args).includes('correo')){
+            const usuarioEliminado = await userModel.findOneAndDelete({correo: args.correo})
+            return usuarioEliminado}
+        },
+        editarUsuario: async (parent,args) =>{
+            const edicionUsuario = await userModel.findByIdAndUpdate(args._id,
+            {_id:args._id,
+            nombre: args.nombre,
+            apellido:args.apellido,
+            identificacion:args.identificacion,
+            correo: args.correo,
+            rol : args.rol }   
+        )
+        }
     },
 };
 

@@ -26,6 +26,7 @@ const typeDefs = gql`
 
     type Query {
         Usuarios:[Usuario]
+        Usuario(_id:String!) :Usuario
     }
     type Mutation{
     crearUsuario(
@@ -33,9 +34,24 @@ const typeDefs = gql`
         apellido:String!
         identificacion : String
         correo : String!
-        estado : Enum_EstadoUsuario!
+        estado : Enum_EstadoUsuario
         rol : Enum_Rol!
     ):Usuario}
+    
+    type Mutation{
+        eliminarUsuario(_id:String!):Usuario
+    }
+    type Mutation{
+    editarUsuario(
+        _id :ID!
+        nombre: String
+        apellido:String
+        identificacion : String
+        correo : String
+        estado : Enum_EstadoUsuario
+        rol : Enum_Rol
+    ):Usuario}
+
     `;
 
 export{typeDefs};
