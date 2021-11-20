@@ -1,5 +1,8 @@
 import {gql} from 'apollo-server-express';
 import { Enum_estadoUsuario } from '../models/enums';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const typeDefs = gql`
     enum Enum_estadoUsuario {
