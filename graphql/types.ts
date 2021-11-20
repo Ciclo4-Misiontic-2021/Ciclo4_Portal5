@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const typeDefs = gql`
+    scalar Date 
     enum Enum_EstadoUsuario {
         PENDIENTE
         AUTORIZADO 
@@ -14,6 +15,16 @@ const typeDefs = gql`
     LIDER
     ADMINISTRADOR 
     }
+    enum Enum_FaseProyecto {
+        INICIADO
+        EN_DESARROLLO 
+        TERMINADO
+    }
+    enum Enum_EstadoProyecto {
+        ACTIVO
+        INACTIVO
+    }
+
     type Usuario{
         _id : ID!
         nombre: String!
@@ -22,6 +33,16 @@ const typeDefs = gql`
         correo : String!
         estado : Enum_EstadoUsuario!
         rol : Enum_Rol
+    }
+
+    type Proyecto {
+        _id : ID!
+        nombre: String!
+        presupuesto: Float!
+        FechaInicio : Date!
+        fechaFin: Date!
+        estado : Enum_EstadoProyecto!
+        fase : Enum_FaseProyecto
     }
 
     type Query {

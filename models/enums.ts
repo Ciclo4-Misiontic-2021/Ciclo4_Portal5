@@ -8,20 +8,16 @@ enum Enum_EstadoUsuario{
     AUTORIZADO = "AUTORIZADO",
     NO_AUTORIZADO= "NO AUTORIZADO",
 }
-enum Enum_EstadoProjecto{
-    activo="Activo",
-    inactivo = "Inactivo",
+enum Enum_EstadoProyecto{
+    ACTIVO="ACTIVO",
+    INACTIVO = "INACTIVO",
 }
-enum Enum_FaseProjecto{
-    iniciado = "Iniciado",
-    desarrollo = "En Desarrollo",
-    terminado = "Terminado",
+enum Enum_FaseProyecto{
+    INICIADO = "INICIADO",
+    EN_DESARROLLO = "EN DESARROLLO",
+    TERMINADO = "TERMINADO",
     nul = " ",
 
 }
-enum Enum_TipoObjetivo{
-    general = "general",
-    especifico = "especifico"
-}
 
-export {Enum_Rol,Enum_EstadoUsuario,Enum_EstadoProjecto,Enum_FaseProjecto,Enum_TipoObjetivo};
+export {Enum_Rol,Enum_EstadoUsuario,Enum_EstadoProyecto,Enum_FaseProyecto};
