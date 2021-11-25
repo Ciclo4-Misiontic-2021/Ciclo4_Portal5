@@ -1,5 +1,5 @@
-import { projectModel } from "../models/projects";
-import { userModel } from "../models/user";
+import { projectModel } from "../models/projects.js";
+import { userModel } from "../models/user.js";
 
 const resolvers ={
     Query    :{

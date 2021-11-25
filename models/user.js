@@ -1,18 +1,20 @@
-import { Schema,model } from "mongoose";
-import {Enum_Rol,Enum_EstadoUsuario} from './enums';
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
+//import {Enum_Rol,Enum_EstadoUsuario} from './enums';
 
 
-interface User{
-    correo:string;
-    identificacion: string;
-    nombre:string;
-    apellido:string;
-    rol:Enum_Rol;
-    estado:Enum_EstadoUsuario;
-}
+//interface User{
+ //   correo:string;
+ //   identificacion: string;
+ //   nombre:string;
+ //   apellido:string;
+ //   rol:Enum_Rol;
+ //   estado:Enum_EstadoUsuario;
+//}
+
 // string con s minuscula es de tp y con S con mongoose
 
-const userSchema = new Schema<User>({
+const userSchema = new mongoose.Schema({
     correo:{
         type:String,
         requied:true,
@@ -43,12 +45,12 @@ const userSchema = new Schema<User>({
     rol:{
         type:String,
         require:true,
-        enum:Enum_Rol,
+        enum:['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
     },
     estado:{
         type:String,
-        enum:Enum_EstadoUsuario,
-        default: Enum_EstadoUsuario.PENDIENTE,
+        enum:['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
+        default: 'PENDIENTE',
     }
 }
 );
