@@ -181,7 +181,7 @@ const typeDefs = gql`
     }
 
     type Query {
-      Solicitudes: [Solicitud]
+      consultarSolicitudes: [Solicitud]
     }
     
     type Mutation{
@@ -190,12 +190,12 @@ const typeDefs = gql`
           proyecto: String!
           estudiante: String!
           estado: Enum_EstadoSolicitud!
+          
       ): Solicitud
       "Permite actualizar el estado de una solicitud generada por un estudiante para pertenecer a un proyecto"  
       actualizarEstadoSolicitud(
           _id: String! 
-          estado:String!
-          fechaInicio: Date!  
+          estado:String! 
       ):Solicitud
     }
     `;

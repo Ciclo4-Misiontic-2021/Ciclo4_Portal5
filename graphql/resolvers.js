@@ -84,8 +84,10 @@ const resolvers ={
           .populate('estudiante');
           return avances;
         },
-        Solicitudes : async (parent,args) =>{
-          const solicitudes = await solicitudModel.find();
+        consultarSolicitudes : async (parent,args) =>{
+          const solicitudes = await solicitudModel.find()
+          .populate('proyecto')
+          .populate('estudiante');
           return solicitudes;
         },
       },
@@ -289,7 +291,8 @@ const resolvers ={
             const crearSolicitud = await solicitudModel.create({
                 estado: args.estado,
                 proyecto: args.proyecto,
-                estudiante: args.estudiante,             
+                estudiante: args.estudiante,
+                fechaIngreso: Date.now(),             
             });
             const solicitud = await solicitudModel.findOne({
                 proyecto: args.proyecto,
@@ -299,15 +302,19 @@ const resolvers ={
           },
        
           actualizarEstadoSolicitud: async (parent,args) =>{
+            try {
             const solicitudAprobada = await solicitudModel.findByIdAndUpdate(
                 args.id, 
                 {
-                estado: args.estado,
-                fechaIngreso: Date.now(),                
+                estado: args.estado,     
               },
-            );
-            return solicitudAprobada;
-          
+            )
+            .populate("proyecto").populate("estudiante");
+            return solicitudAprobada;  
+            }catch (error) {
+              console.log(error);
+              return null;
+            }
         },
       },
 
