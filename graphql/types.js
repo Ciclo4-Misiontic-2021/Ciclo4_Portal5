@@ -27,6 +27,12 @@ const typeDefs = gql`
         NULO
     }
 
+    enum Enum_EstadoSolicitud {
+      ACEPTADA
+      RECHAZADA 
+      PENDIENTE
+    }
+
     type Usuario{
         _id : ID!
         nombre: String!
@@ -161,6 +167,36 @@ const typeDefs = gql`
 
         "Actualizar Obervación Proyecto"
         actualizarObservacionProyecto (_idAvance: String!, observaciones: String!, fechaObservacion: Date!): Avance
+    }
+
+  """ SOLICITUD"""
+
+    type Solicitud {
+      _id: ID!
+      estado: Enum_EstadoSolicitud!
+      fechaIngreso: Date
+      fechaEgreso: Date
+      proyecto: Proyecto!
+      estudiante: Usuario!    
+    }
+
+    type Query {
+      Solicitudes: [Solicitud]
+    }
+
+    type Mutation{
+      "Permite crear una solicitud por parte de un estudiante para pertenecer a un proyecto"
+      crearSolicitud(
+          proyecto: String!
+          estudiante:String!
+          estado: Enum_EstadoSolicitud!
+      ): Solicitud
+      "Permite actualizar el estado de una solicitud generada por un estudiante para pertenecer a un proyecto"  
+      actualizarEstadoSolicitud(
+          _id: String! 
+          estado:String!
+          fechaInicio: Date!  
+      ):Solicitud
     }
 
     `;
