@@ -36,24 +36,10 @@ const typeDefs = gql`
         rol : Enum_Rol
     }
 
-    type Proyecto {
-        _id : ID!
-        nombre: String!
-        presupuesto: Float!
-        fechaInicio : Date!
-        fechaFin: Date!
-        estado : Enum_EstadoProyecto!
-        fase : Enum_FaseProyecto
-        lider : String!
-        objetivosGenerales:String
-        objetivosEspecificos:String
-    }
-
     type Query {
         Usuarios:[Usuario]
         Usuario(_id:String!) :Usuario
-        Proyectos : [Proyecto]
-        Proyecto(_id:String!): Proyecto
+        
     }
     type Mutation{
     crearUsuario(
@@ -78,6 +64,74 @@ const typeDefs = gql`
         estado : Enum_EstadoUsuario
         rol : Enum_Rol
     ):Usuario}
+
+  """
+  PROYECTOS
+  """
+  type Proyecto {
+    _id: ID
+    nombre: String
+    presupuesto: Int
+    fechaInicio: Date
+    fechaFin: Date
+    estado: Enum_EstadoProyecto
+    fase: Enum_FaseProyecto
+    lider: Usuario
+    objetivosGenerales: String
+    objetivosEspecificos: String
+    apruebaCreacion: Boolean
+  }
+
+  input CreaProyectoInput {
+    nombre: String!
+    idLider: String!
+    objetivosGenerales: String!
+    objetivosEspecificos: String!
+    presupuesto: Int!
+  }
+
+  input ActualizaProyectoInput {
+    _id: ID!
+    nombre: String!
+    objetivosGenerales: String
+    objetivosEspecificos: String
+    presupuesto: Int
+  }
+
+  input ActualizaEstadoProyectoInput {
+    _id: ID!
+    estado: String!
+    fechaInicio: Date!
+  }
+
+  input ActualizaFaseProyectoInput {
+    _id: ID!
+    fase: String!
+  }
+
+  type Query {
+    "Listar los proyectos existentes en la BD"
+    listarProyectos: [Proyecto]
+    "Consultar un proyecto específico ingresando su id"
+    consultarProyecto(id: ID!): Proyecto
+    "Consultar los proyectos liderados por una persona"
+    consultarProyectosLider(idLider: ID!): [Proyecto]
+    "Consultar los proyectos en los que está Autorizado un estudiante"
+    consultarProyectosEstudiante(idEstudiante: ID!): [Proyecto]
+  }
+
+  type Mutation {
+    "Crea un nuevo proyecto a partir de sus datos básicos"
+    crearProyecto(input: CreaProyectoInput!): Proyecto
+    "Autoriza la creación del proyecto"
+    autorizaCreacionProyecto(id: ID!): Proyecto
+    "Realiza la actualización de los datos básicos del proyecto"
+    actualizarProyecto(input: ActualizaProyectoInput!): Proyecto
+    "Realiza la actualización del estado del proyecto"
+    actualizarEstadoProyecto(input: ActualizaEstadoProyectoInput!): Proyecto
+    "Realiza la actualización de la fase del proyecto"
+    actualizarFaseProyecto(input: ActualizaFaseProyectoInput!): Proyecto
+  }
 
     `;
 

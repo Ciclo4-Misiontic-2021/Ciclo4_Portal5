@@ -24,7 +24,8 @@ estado:{type:String,Enum: ['ACTIVO', 'INACTIVO'], default: 'INACTIVO',},
 fase:{type:String,Enum:['INICIADO', 'DESARROLLO', 'TERMINADO', 'NULO'],default:'NULO'},
 lider:{type: Schema.Types.ObjectId,ref: userModel,},
 objetivosGenerales:{type:String ,default : " "},
-objetivosEspecificos:{type:String ,default : " "}
+objetivosEspecificos:{type:String ,default : " "},
+apruebaCreacion:{type: Boolean, default: false},
 })
 const projectModel = model('proyecto',projectSchema)
 

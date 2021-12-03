@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import { Schema,model, SchemaTypes } from "mongoose";
 //import {Enum_FaseProyecto,Enum_EstadoProyecto, Enum_EstadoUsuario} from './enums';
 import { projectModel } from "./projects.js";
 import {userModel} from "./user.js";
