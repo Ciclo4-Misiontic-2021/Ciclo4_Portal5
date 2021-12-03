@@ -5,6 +5,7 @@ dotenv.config()
 
 const typeDefs = gql`
     scalar Date 
+    
     enum Enum_EstadoUsuario {
         PENDIENTE
         AUTORIZADO 
@@ -132,6 +133,35 @@ const typeDefs = gql`
     "Realiza la actualización de la fase del proyecto"
     actualizarFaseProyecto(input: ActualizaFaseProyectoInput!): Proyecto
   }
+
+  """ AVANCE """
+
+    type Avance {
+        _id: ID!
+        proyecto: Proyecto!
+        estudiante: Usuario!
+        descripcion: String!
+        observaciones: String
+        fechaAvance: Date!
+        fechaObservacion: Date
+    }
+
+    type Query {  
+        "Permite consultar los avances de un Proyecto indicado"
+        listarAvancesProyecto(idProyecto: String!): [Avance] 
+
+    }
+
+    type Mutation{
+        "Crear Avance Proyecto"
+        crearAvanceProyecto (_idProyecto: String!, _idEstudiante: String!, descripcion: String!, fechaAvance: Date!): Avance
+
+        "Actualizar Avance Proyecto"
+        actualizarAvanceProyecto (_idAvance: String!, descripcion: String! , fechaAvance: Date!): Avance
+
+        "Actualizar Obervación Proyecto"
+        actualizarObservacionProyecto (_idAvance: String!, observaciones: String!, fechaObservacion: Date!): Avance
+    }
 
     `;
 

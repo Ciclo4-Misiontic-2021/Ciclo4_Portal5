@@ -1,6 +1,7 @@
 import { projectModel } from "../models/projects.js";
 import { userModel } from "../models/user.js";
 import { solicitudModel } from "../models/solicitud.js";
+import { avanceModel} from "../models/avance.js"
 
 
 const resolvers ={
@@ -75,6 +76,13 @@ const resolvers ={
             console.log(error);
             return null;
           }
+        },
+        listarAvancesProyecto: async (parent, args) => {
+          const avances = await avanceModel
+          .find({ proyecto: args.idProyecto })
+          .populate('proyecto')
+          .populate('estudiante');
+          return avances;
         },
       },
     
@@ -221,6 +229,58 @@ const resolvers ={
             return null;
           }
         },
+        crearAvanceProyecto: async (parents, args) => {   
+          await avanceModel.create({
+              proyecto: args._idProyecto,
+              estudiante: args._idEstudiante,                
+              descripcion: args.descripcion,
+              fechaAvance: args.fechaAvance, 
+               
+          });
+          const avance = await avanceModel
+          .findOne({
+            proyecto: args._idProyecto,
+            estudiante:args._idEstudiante,
+          })
+          .populate("proyecto").populate("estudiante");
+          console.log(avance);
+          return avance;
+      },  
+
+      actualizarAvanceProyecto: async (parents, args) =>{
+          try {
+              await avanceModel.findByIdAndUpdate(args._idAvance, {
+                descripcion: args.descripcion,
+                fechaAvance: args.fechaAvance,
+              });
+              const avance = await avanceModel
+              .findOne({
+              _id: args._idAvance,
+              })
+              .populate("proyecto").populate("estudiante");
+              return avance;
+            }catch (error) {
+              console.log(error);
+              return null;
+            }
+      },  
+      actualizarObservacionProyecto: async (parents, args) =>{
+          try {
+              await avanceModel.findByIdAndUpdate(args._idAvance, {
+                observaciones: args.observaciones,
+                fechaObservacion: args.fechaObservacion,
+              });
+              const avance = await avanceModel
+              .findOne({
+              _id: args._idAvance,
+              })
+              .populate("proyecto").populate("estudiante");
+              return avance;
+            }catch (error) {
+              console.log(error);
+              return null;
+            }
+          },     
       },
 };
 export {resolvers};
