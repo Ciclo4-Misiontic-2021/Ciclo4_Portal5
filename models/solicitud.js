@@ -1,13 +1,7 @@
 import mongoose from 'mongoose';
 import {userModel} from "./user.js";
 import {projectModel} from "./projects.js"
-//import {Enum_FaseProyecto,Enum_EstadoProyecto, Enum_EstadoUsuario} from './enums';
 const{ Schema, model}= mongoose;
-//interface solicitud{
-    //proyecto : Schema.Types.ObjectId; 
-    //estudiante : Schema.Types.ObjectId;
-    //estado : Enum_EstadoUsuario;
-//}
 
 const solicitudSchema = new Schema({
     estado: {

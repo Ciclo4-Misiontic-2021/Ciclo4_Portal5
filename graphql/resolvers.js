@@ -284,33 +284,34 @@ const resolvers ={
               console.log(error);
               return null;
             }
-          },     
-      },
-      crearSolicitud: async (parent,args) =>{
-        const crearSolicitud = await solicitudModel.create({
-            estado: args.estado,
-            proyecto: args.proyecto,
-            estudiante: args.estudiante,             
-        });
-        const solicitud = await solicitudModel
-        .findOne({
-            proyecto: args.proyecto,
-            estudiante: args.estudiante,
-        })
-        .populate("proyecto").populate("estudiante")
-        return solicitud;
+          },
+          crearSolicitud: async (parent,args) =>{
+            const crearSolicitud = await solicitudModel.create({
+                estado: args.estado,
+                proyecto: args.proyecto,
+                estudiante: args.estudiante,             
+            });
+            const solicitud = await solicitudModel.findOne({
+                proyecto: args.proyecto,
+                estudiante: args.estudiante,
+            }).populate("proyecto").populate("estudiante");
+            return solicitud;
+          },
+       
+          actualizarEstadoSolicitud: async (parent,args) =>{
+            const solicitudAprobada = await solicitudModel.findByIdAndUpdate(
+                args.id, 
+                {
+                estado: args.estado,
+                fechaIngreso: Date.now(),                
+              },
+            );
+            return solicitudAprobada;
+          
+        },
       },
 
-      actualizarEstadoSolicitud: async (parent,args) =>{
-          const solicitudAprobada = await solicitudModel.findByIdAndUpdate(
-              args.id, 
-              {
-              estado: args.estado,
-              fechaIngreso: Date.now(),                
-            },
-          );
-          return solicitudAprobada;
-        
-      },
+
+
 };
 export {resolvers};
