@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         enum:['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
         default: 'PENDIENTE',
+    },
+    contrasena:{
+        type:String,
+        require:true,
     }
 }
 );

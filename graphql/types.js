@@ -39,38 +39,45 @@ const typeDefs = gql`
         apellido:String!
         identificacion : String
         correo : String!
+        contrasena : String!
         estado : Enum_EstadoUsuario!
         rol : Enum_Rol
     }
 
     type Query {
-        Usuarios:[Usuario]
-        Usuario(_id:String!) :Usuario
-        
+        "listar usuarios"
+        listarUsuarios:[Usuario]
+        "consultar Usuarios a partir de su id"
+        consultarUsuario(_id:String!) :Usuario
+        "validar que existe un usuario a partir del correo y la contraseña proporcionados"
+        validarUsuario(correo: String!,contrasena:String!) :Usuario 
+        "listar los usuarios con rol estudiante"
+        listarUsuariosEstudiantes: [Usuario]
     }
     type Mutation{
+    "crear un nuevo Usuario  "
     crearUsuario(
         nombre: String!
         apellido:String!
         identificacion : String
         correo : String!
+        contrasena: String!
         estado : Enum_EstadoUsuario
         rol : Enum_Rol!
-    ):Usuario}
-    
-    type Mutation{
-        eliminarUsuario(_id:String!):Usuario
-    }
-    type Mutation{
-    editarUsuario(
+    ):Usuario
+    "Actualizar un usuario existente"
+    actualizarUsuario(
         _id :ID!
         nombre: String
         apellido:String
         identificacion : String
         correo : String
+        contrasena: String
         estado : Enum_EstadoUsuario
         rol : Enum_Rol
-    ):Usuario}
+    ):Usuario
+    
+    }
 
   """
   PROYECTOS

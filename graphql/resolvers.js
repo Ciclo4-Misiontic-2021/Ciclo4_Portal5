@@ -6,12 +6,25 @@ import { avanceModel} from "../models/avance.js"
 
 const resolvers ={
     Query: {
-        Usuarios: async (parent, args) => {
+        listarUsuarios: async (parent, args) => {
           const usuarios = await userModel.find();
           return usuarios;
         },
-        Usuario: async (parent, args) => {
+        consultarUsuario: async (parent, args) => {
           const usuario = await userModel.findOne({ _id: args._id });
+          return usuario;
+        },
+        validarUsuario: async (parent,args) => {
+          try {
+          const usuario= await userModel.findOne({correo : args.correo ,contrasena : contrasena });
+            return usuario
+          }catch (error) {
+            console.log(error);
+            return null;
+          }
+        },
+        listarUsuariosEstudiantes: async (parent, args) => {
+          const usuario = await userModel.find({ rol: "ESTUDIANTE" });
           return usuario;
         },
         listarProyectos: async (parent, args) => {
@@ -94,12 +107,14 @@ const resolvers ={
     
       Mutation: {
         crearUsuario: async (parent, args) => {
+          try {
           console.log("estoy ejecutando una creación");
           const usuarioCreado = await userModel.create({
             nombre: args.nombre,
             apellido: args.apellido,
             identificacion: args.identificacion,
             correo: args.correo,
+            contrasena : args.contrasena,
             rol: args.rol,
           });
           // verifica si se ingreso un estado y modifica el de defecto
@@ -107,31 +122,26 @@ const resolvers ={
             usuarioCreado.estado = args.estado;
           }
           return usuarioCreado;
+        } catch (error) {
+          console.log(error);
+          return null;
+        }
         },
-        eliminarUsuario: async (parent, args) => {
-          //elimina con id y correo
-          if (Object.keys(args).includes("_id")) {
-            const usuarioEliminado = await userModel.findOneAndDelete({
-              _id: args._id,
-            });
-            return usuarioEliminado;
-          } else if (Object.keys(args).includes("correo")) {
-            const usuarioEliminado = await userModel.findOneAndDelete({
-              correo: args.correo,
-            });
-            return usuarioEliminado;
-          }
-        },
-        editarUsuario: async (parent, args) => {
+
+        actualizarUsuario: async (parent, args) => {
           const edicionUsuario = await userModel.findByIdAndUpdate(args._id, {
             _id: args._id,
             nombre: args.nombre,
             apellido: args.apellido,
             identificacion: args.identificacion,
             correo: args.correo,
+            contrasena : args.contrasena,
             rol: args.rol,
+            estado: args.estado,
           });
         },
+        
+
         crearProyecto: async (parent, args) => {
           try {
             const usuariolider = await userModel.findOne({
@@ -304,7 +314,7 @@ const resolvers ={
           actualizarEstadoSolicitud: async (parent,args) =>{
             try {
             const solicitudAprobada = await solicitudModel.findByIdAndUpdate(
-                args.id, 
+                args._id, 
                 {
                 estado: args.estado,     
               },
