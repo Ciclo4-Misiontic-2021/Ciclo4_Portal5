@@ -46,11 +46,11 @@ const typeDefs = gql`
 
     type Query {
         "listar usuarios"
-        listarUsuarios:[Usuario]
+        listarUsuarios: [Usuario]
         "consultar Usuarios a partir de su id"
-        consultarUsuario(_id:String!) :Usuario
+        consultarUsuario(_id:String!): Usuario
         "validar que existe un usuario a partir del correo y la contraseña proporcionados"
-        validarUsuario(correo: String!,contrasena:String!) :Usuario 
+        validarUsuario(correo: String!,contrasena:String!): Usuario 
         "listar los usuarios con rol estudiante"
         listarUsuariosEstudiantes: [Usuario]
     }
@@ -59,22 +59,20 @@ const typeDefs = gql`
     crearUsuario(
         nombre: String!
         apellido:String!
-        identificacion : String
+        identificacion : String!
         correo : String!
         contrasena: String!
-        estado : Enum_EstadoUsuario
         rol : Enum_Rol!
     ):Usuario
     "Actualizar un usuario existente"
     actualizarUsuario(
         _id :ID!
-        nombre: String
-        apellido:String
-        identificacion : String
-        correo : String
-        contrasena: String
-        estado : Enum_EstadoUsuario
-        rol : Enum_Rol
+        nombre: String!
+        apellido:String!
+        identificacion : String!
+        correo : String!
+        estado : Enum_EstadoUsuario!
+        rol : Enum_Rol!
     ):Usuario
     
     }
