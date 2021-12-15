@@ -111,7 +111,6 @@ const resolvers = {
   Mutation: {
     crearUsuario: async (parent, args) => {
       try {
-        console.log("estoy ejecutando una creación");
         const usuarioCreado = await userModel.create({
           nombre: args.nombre,
           apellido: args.apellido,
@@ -241,6 +240,7 @@ const resolvers = {
       try {
         const editar = await projectModel.findByIdAndUpdate(args.input._id, {
           fase: args.input.fase,
+          fechaFin: args.input.fechaFin,
         });
         const proyecto = await projectModel
           .findOne({
@@ -267,7 +267,6 @@ const resolvers = {
         })
         .populate("proyecto")
         .populate("estudiante");
-      console.log(avance);
       return avance;
     },
 
