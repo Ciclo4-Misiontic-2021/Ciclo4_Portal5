@@ -161,6 +161,8 @@ const typeDefs = gql`
   type Query {
     "Permite consultar los avances de un Proyecto indicado"
     listarAvancesProyecto(idProyecto: String!): [Avance]
+    "Permite consultar un avance de oroyecto específico"
+    consultarAvanceProyecto(id: ID!): Avance
   }
 
   type Mutation {

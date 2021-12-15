@@ -99,6 +99,18 @@ const resolvers = {
         .populate("estudiante");
       return avances;
     },
+    consultarAvanceProyecto: async (parent, args) => {
+      try {
+        const avance = await avanceModel
+          .findOne({ _id: args.id })
+          .populate("proyecto")
+          .populate("estudiante");
+        return avance;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    },
     consultarSolicitudes: async (parent, args) => {
       const solicitudes = await solicitudModel
         .find()
