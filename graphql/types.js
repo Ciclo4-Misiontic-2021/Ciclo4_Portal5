@@ -202,7 +202,10 @@ const typeDefs = gql`
   }
 
   type Query {
+    "Consulta las solicitudes registradas en el sistema"
     consultarSolicitudes: [Solicitud]
+    "Consulta una solicitud en particular a partir de su identificador"
+    consultarSolicitud(id: ID!): Solicitud
   }
 
   type Mutation {

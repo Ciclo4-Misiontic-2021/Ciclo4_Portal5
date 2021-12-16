@@ -118,6 +118,18 @@ const resolvers = {
         .populate("estudiante");
       return solicitudes;
     },
+    consultarSolicitud: async (parent, args) => {
+      try {
+        const solicitud = await solicitudModel
+          .findOne({ _id: args.id })
+          .populate("proyecto")
+          .populate("estudiante");
+        return solicitud;
+      } catch (error) {
+        console.log(error);
+        return null;
+      }
+    },
   },
 
   Mutation: {
