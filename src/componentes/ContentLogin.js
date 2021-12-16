@@ -70,7 +70,10 @@ const Content = () => {
         body: queryValidarUsuario(usuario.correo, usuario.pass),
       };
 
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
       const data = await response.json();
       if (data.data.validarUsuario) {
         localStorage.setItem("estado", data.data.validarUsuario.estado);

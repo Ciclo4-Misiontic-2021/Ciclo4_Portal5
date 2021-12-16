@@ -172,7 +172,10 @@ const ListarAvances = () => {
         },
         body: queryListaAvances(),
       };
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
 
       const data = await response.json();
 
@@ -196,7 +199,10 @@ const ListarAvances = () => {
         },
         body: queryConsultarAvance(id),
       };
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
       const data = await response.json();
 
       if (data.data.consultarAvanceProyecto) {
@@ -245,7 +251,10 @@ const ListarAvances = () => {
         },
         body: consulta,
       };
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
       const data = await response.json();
 
       if (

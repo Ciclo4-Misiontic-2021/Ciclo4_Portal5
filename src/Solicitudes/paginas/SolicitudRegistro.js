@@ -97,7 +97,10 @@ const SolicitudRegistro = () => {
         },
         body: consulta,
       };
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
       const data = await response.json();
       if (data.data.listarProyectos) {
         setProyectos(data.data.listarProyectos);
@@ -126,7 +129,10 @@ const SolicitudRegistro = () => {
         },
         body: consulta,
       };
-      const response = await fetch("http://localhost:4000/graphql", config);
+      const response = await fetch(
+        "https://p0rt4l5b4ck.herokuapp.com/graphql",
+        config
+      );
       const data = await response.json();
       if (data.data.crearSolicitud) {
         popupExitoso("Registro exitoso");
@@ -212,7 +218,8 @@ const SolicitudRegistro = () => {
                   </Form.Group>
 
                   <div className="form-group mt-5">
-                    <Button className="btn btn-primary"
+                    <Button
+                      className="btn btn-primary"
                       type="button"
                       onClick={registrarSolicitud}
                     >
